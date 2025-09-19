@@ -1,0 +1,1 @@
+Scripture of the Day site. Replace assets/bg.png with your glowing cross background.
