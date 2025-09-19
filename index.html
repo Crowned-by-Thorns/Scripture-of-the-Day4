@@ -16,8 +16,8 @@ background-attachment: fixed;
 background-size: cover;
       color:#2b2118;
     }
-   header {
-  background: rgba(255, 255, 255, 0.65); /* translucent header */
+  header {
+  background: rgba(255, 255, 255, 0.65);
   border-bottom: 1px solid #eadfcd;
   padding: 12px 16px;
   display: flex;
@@ -32,13 +32,31 @@ background-size: cover;
   max-width: 800px;
   padding: 20px;
 
-  /* Position near the base of the cross, responsive */
-  /* Top margin grows with viewport height but stays in a sensible range */
+  /* Sit at the base of the centered cross (responsive) */
   margin: clamp(220px, 60vh, 360px) auto 40px;
 
   backdrop-filter: blur(4px);
   animation: fade-in 500ms ease-out both;
 }
+    /* Fine-tune top offset for very small/tall screens */
+@media (max-width: 420px) {
+  .card { margin-top: clamp(170px, 56vh, 310px); }
+}
+@media (min-height: 900px) {
+  .card { margin-top: clamp(280px, 62vh, 420px); }
+}
+
+/* Gentle entrance */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
+}
+    
     /* Tweak top offset on very small and very tall screens */
 @media (max-width: 420px) {
   .card { margin-top: clamp(160px, 55vh, 300px); }
