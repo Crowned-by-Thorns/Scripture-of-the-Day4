@@ -4,113 +4,233 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scripture of the Day</title>
+  <meta name="description" content="A warm page that speaks a fresh Bible verse each visit." />
   <style>
+    /* ---------- Page + background ---------- */
     body {
-      margin:0;
-      font-family: system-ui, sans-serif;
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #2b2118;
       background-color: #f5e9d4;
-background-image: url('assets/bg.jpg');
-background-position: center;
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-size: cover;
-      color:#2b2118;
+      background-image: url('assets/bg.jpg'); /* <-- your cross background */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
     }
-  header {
-  background: rgba(255, 255, 255, 0.65);
-  border-bottom: 1px solid #eadfcd;
-  padding: 12px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-    h1 { margin:0; color:#a86b3d; font-size:18px; }
+
+    /* ---------- Header ---------- */
+    header {
+      background: rgba(255, 255, 255, 0.65); /* translucent so rays shine through */
+      border-bottom: 1px solid #eadfcd;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(3px);
+    }
+    h1 {
+      margin: 0;
+      color: #a86b3d;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+
+    /* ---------- Verse card (bubble) ---------- */
     .card {
-  background: rgba(255, 250, 241, 0.85);      /* soft parchment */
-  border-radius: 14px;
-  box-shadow: 0 20px 48px rgba(0,0,0,.18), inset 0 0 1px #eadfcd;
-  max-width: 800px;
-  padding: 20px;
+      background: rgba(255, 250, 241, 0.85);     /* soft parchment with a little transparency */
+      border-radius: 14px;
+      box-shadow: 0 20px 48px rgba(0,0,0,.18), inset 0 0 1px #eadfcd;
+      max-width: 800px;
+      padding: 20px;
 
-  /* Sit at the base of the centered cross (responsive) */
-  margin: clamp(220px, 60vh, 360px) auto 40px;
+      /* Sit near the base of the centered cross across devices */
+      margin: clamp(220px, 60vh, 360px) auto 40px;
 
-  backdrop-filter: blur(4px);
-  animation: fade-in 500ms ease-out both;
-}
-    /* Fine-tune top offset for very small/tall screens */
-@media (max-width: 420px) {
-  .card { margin-top: clamp(170px, 56vh, 310px); }
-}
-@media (min-height: 900px) {
-  .card { margin-top: clamp(280px, 62vh, 420px); }
-}
+      backdrop-filter: blur(4px);
+      animation: fade-in 500ms ease-out both;
+    }
 
-/* Gentle entrance */
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+    /* Fine-tune for very small / very tall screens */
+    @media (max-width: 420px) {
+      .card { margin-top: clamp(170px, 56vh, 310px); }
+    }
+    @media (min-height: 900px) {
+      .card { margin-top: clamp(280px, 62vh, 420px); }
+    }
 
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .card { animation: none; }
-}
-    
-    /* Tweak top offset on very small and very tall screens */
-@media (max-width: 420px) {
-  .card { margin-top: clamp(160px, 55vh, 300px); }
-}
-@media (min-height: 900px) {
-  .card { margin-top: clamp(280px, 62vh, 420px); }
-}
+    @keyframes fade-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .card { animation: none; } }
 
-/* Gentle entrance */
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+    .ref  { color: #a86b3d; font-weight: 600; }
+    .text {
+      font-size: 22px;
+      line-height: 1.6;
+      background: #ffefb8;
+      padding: 12px;
+      border-radius: 10px;
+    }
+    @media (max-width: 420px) { .text { font-size: 20px; } }
 
-/* Respect users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .card { animation: none; }
-}
-    .ref  { color:#a86b3d; font-weight:600; }
-.text { font-size: 22px; line-height: 1.6; background:#ffefb8; padding:12px; border-radius:10px; }
-@media (max-width: 420px) { .text { font-size: 20px; } }
-   button {
-  margin: 5px; padding: 10px 14px;
-  border-radius: 12px; border: 1px solid #e5d6c2;
-  background: #fff; box-shadow: 0 1px 0 #f5ece0 inset;
-}
-button:hover { background: #fff7ea; cursor: pointer; }
+    /* ---------- Buttons ---------- */
+    .btns { display: flex; gap: 8px; }
+    button {
+      margin: 5px 0;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #e5d6c2;
+      background: #fff;
+      box-shadow: 0 1px 0 #f5ece0 inset;
+      color: #2b2118;
+      font-size: 14px;
+    }
+    button:hover { background: #fff7ea; cursor: pointer; }
   </style>
 </head>
 <body>
   <header>
     <h1>Scripture of the Day</h1>
-    <div>
-      <button id="againBtn">⟳ Another verse</button>
-      <button id="speakBtn">🔊 Replay</button>
+    <div class="btns">
+      <button id="againBtn" aria-label="Another verse">⟳ Another verse</button>
+      <button id="speakBtn" aria-label="Replay">🔊 Replay</button>
     </div>
   </header>
-  <div class="card">
-    <div class="ref" id="ref"></div>
-    <div class="text" id="text"></div>
-  </div>
-<script>
-  async function loadDB(){ const r=await fetch('data/kjv_sample.json'); return r.json(); }
-  function allRefs(db){ let out=[]; for(const b in db){ for(const c in db[b]){ for(const v in db[b][c]) out.push({book:b,chapter:c,verse:v,text:db[b][c][v]}); } } return out; }
-  function refStr(r){ return `${r.book} ${r.chapter}:${r.verse}`; }
-  let verses=[], current=null, voice=null;
-  function chooseVoice(){ const vs=speechSynthesis.getVoices(); voice=vs.find(v=>/female|samantha|aria|jenny|zira|victoria|karen/i.test(v.name))||vs.find(v=>/en/i.test(v.lang))||vs[0]; }
-  function speak(t){ if(!('speechSynthesis' in window)) return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); if(voice) u.voice=voice; speechSynthesis.speak(u); }
-  function show(r){ document.getElementById('ref').textContent=refStr(r); document.getElementById('text').textContent=r.text; current=r; setTimeout(()=>speak(r.text),200); }
-  async function roll(){ if(!verses.length){ const db=await loadDB(); verses=allRefs(db);} show(verses[Math.floor(Math.random()*verses.length)]); }
-  document.getElementById('againBtn').onclick=roll;
-  document.getElementById('speakBtn').onclick=()=>speak(current.text);
-  speechSynthesis.onvoiceschanged=chooseVoice; chooseVoice();
-  roll();
-</script>
+
+  <main>
+    <section class="card" aria-live="polite">
+      <div class="ref" id="ref"></div>
+      <div class="text" id="text"></div>
+    </section>
+  </main>
+
+  <script>
+    /* ===================== Random verse data ===================== */
+    async function loadDB() {
+      const r = await fetch('data/kjv_sample.json', { cache: 'no-store' });
+      return r.json();
+    }
+    function allRefs(db) {
+      const out = [];
+      for (const book in db) {
+        for (const ch in db[book]) {
+          for (const v in db[book][ch]) {
+            out.push({ book, chapter: ch, verse: v, text: db[book][ch][v] });
+          }
+        }
+      }
+      return out;
+    }
+    function refStr(r) { return `${r.book} ${r.chapter}:${r.verse}`; }
+    function pickRandom(a) { return a[Math.floor(Math.random() * a.length)]; }
+
+    /* ===================== Speech (US female) ===================== */
+    const PREFERRED_NAMES = [
+      'Samantha',               // iOS/macOS
+      'Google US English',      // Chrome
+      'Microsoft Aria',         // Edge
+      'Microsoft Jenny',
+      'Microsoft Zira',
+      'Allison', 'Joanna'
+    ];
+    let chosenVoice = null;
+
+    function pickVoice() {
+      const voices = window.speechSynthesis.getVoices() || [];
+
+      // 1) Preferred names with en-US
+      for (const name of PREFERRED_NAMES) {
+        const v = voices.find(v =>
+          (v.name || '').toLowerCase().includes(name.toLowerCase()) &&
+          (v.lang || '').toLowerCase().startsWith('en-us')
+        );
+        if (v) return v;
+      }
+      // 2) Any en-US female-ish by name
+      const enUSFemale = voices.find(v =>
+        (v.lang || '').toLowerCase().startsWith('en-us') &&
+        /female|samantha|aria|jenny|zira|allison|joanna/i.test(v.name || '')
+      );
+      if (enUSFemale) return enUSFemale;
+
+      // 3) Any en-US
+      const enUS = voices.find(v => (v.lang || '').toLowerCase().startsWith('en-us'));
+      if (enUS) return enUS;
+
+      // 4) Any English female-ish
+      const enFemale = voices.find(v =>
+        /en(-|_|$)/i.test(v.lang || '') &&
+        /female|samantha|aria|jenny|zira|allison|joanna|karen|victoria/i.test(v.name || '')
+      );
+      if (enFemale) return enFemale;
+
+      // 5) Any English
+      const anyEn = voices.find(v => /en(-|_|$)/i.test(v.lang || ''));
+      return anyEn || voices[0] || null;
+    }
+
+    function ensureVoices(thenSpeakText) {
+      const tryLoad = () => {
+        const list = window.speechSynthesis.getVoices();
+        if (!list || list.length === 0) return false;
+        chosenVoice = pickVoice();
+        if (thenSpeakText) speak(thenSpeakText);
+        return true;
+      };
+      if (!tryLoad()) {
+        const iv = setInterval(() => { if (tryLoad()) clearInterval(iv); }, 120);
+        window.speechSynthesis.onvoiceschanged = () => {
+          if (tryLoad()) window.speechSynthesis.onvoiceschanged = null;
+        };
+      }
+    }
+
+    function speak(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 0.96;   // a bit slower for clarity
+      u.pitch = 1.03;  // gentle warmth
+      if (chosenVoice) u.voice = chosenVoice;
+      window.speechSynthesis.speak(u);
+    }
+
+    /* ===================== Page logic ===================== */
+    let list = null, current = null;
+
+    function setContent(r) {
+      document.getElementById('ref').textContent = refStr(r);
+      document.getElementById('text').textContent = r.text;
+      current = r;
+      // speak after layout and after voices are ready
+      setTimeout(() => {
+        if (!chosenVoice) ensureVoices(r.text);
+        else speak(r.text);
+      }, 150);
+    }
+
+    async function roll() {
+      if (!list) { const db = await loadDB(); list = allRefs(db); }
+      setContent(pickRandom(list));
+      history.replaceState(null, '', '#'); // keep URL clean
+    }
+
+    async function init() {
+      ensureVoices();           // prime voices early
+      await roll();             // show first verse
+      document.getElementById('againBtn').addEventListener('click', roll);
+      document.getElementById('speakBtn').addEventListener('click', () => {
+        if (current) speak(current.text);
+      });
+
+      // New verse when navigating back/forward to keep it fresh
+      window.addEventListener('pageshow', (e) => { if (e.persisted) roll(); });
+      document.addEventListener('visibilitychange', () => {
+        const nav = performance.getEntriesByType('navigation')[0];
+        if (document.visibilityState === 'visible' && nav && nav.type === 'back_forward') roll();
+      });
+    }
+    init();
+  </script>
 </body>
 </html>
